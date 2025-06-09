@@ -1,0 +1,3 @@
+ARRAY 007154D0 44 C:\장원준\NewDelete\main.cpp : 18
+NOALLOC 0071C658
+LEAK 0071C620 4 C:\장원준\NewDelete\main.cpp : 26

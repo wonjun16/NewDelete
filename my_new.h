@@ -15,22 +15,23 @@ public:
 	MyNew();
 	~MyNew();
 
-	void PushInfo(void* p, size_t size, char* File, int Line, bool isArray);
-	void DeleteInfo();
-private:
+	void PushInfo(void* p, size_t size, const char* File, int Line, bool isArray);
+	void DeleteInfo(const int index);
+
 	AllocInfo AInfo[100];
 
-	int FindEmptyIndex() const;
+	char ErrorLogs[100][256];
+	int LogIndex;
+private:
+	int FindEmptyIndex() const noexcept;
 };
 
-void* operator new(size_t size);
-void* operator new[](size_t size);
-void operator delete(void* p);
+void operator delete(void* p, size_t size);
 void operator delete[](void* p);
 
-void* operator new(size_t size, char* File, int Line);
-void* operator new[](size_t size, char* File, int Line);
-void operator delete(void* p, char* File, int Line);
-void operator delete[](void* p, char* File, int Line);
+void* operator new(size_t size, const char* File, int Line);
+void* operator new[](size_t size, const char* File, int Line);
+void operator delete(void* p, const char* File, int Line);
+void operator delete[](void* p, const char* File, int Line);
 
-#define new(size) new(size, __FILE__, __LINE__) 
+#define new new(__FILE__, __LINE__)
